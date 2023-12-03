@@ -1,14 +1,16 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
+import { View, Text, StyleSheet, Image, Dimensions, ImageSourcePropType } from "react-native";
 import Author from "./Author";
 import Comments from "./Comments";
 import AddComment from "./AddComment";
+import { CommentType, PostType } from "../types/Types";
 
-export default function Post(props: any) {
+
+export default function Post(props: PostType) {
   return (
     <View style={styles.container}>
       <Image source={props.image} style={styles.image} />
-      <Author email={"fulano@gmail.com"} nickname={"Fulano"}/>
+      <Author email={props.email} nickname={props.nickname}/>
       <Comments comments={props.comments} />
       <AddComment />
     </View>
