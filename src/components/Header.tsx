@@ -9,7 +9,7 @@ export default function Header() {
     <SafeAreaView style={styles.container}>
       <View style={styles.rowContainer}>
         <Image source={require(icon)} style={styles.image} />
-        <Text style={styles.title}>Lambe Lambe</Text>
+        <Text style={styles.title}>Picture Store</Text>
       </View>
     </SafeAreaView>
   );
