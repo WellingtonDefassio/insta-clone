@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
 import Author from "./Author";
 import Comments from "./Comments";
+import AddComment from "./AddComment";
 
 export default function Post(props: any) {
   return (
@@ -9,6 +10,7 @@ export default function Post(props: any) {
       <Image source={props.image} style={styles.image} />
       <Author email={"fulano@gmail.com"} nickname={"Fulano"}/>
       <Comments comments={props.comments} />
+      <AddComment />
     </View>
   );
 }
