@@ -12,3 +12,5 @@ export type PostType = {
   image: ImageSourcePropType,
   comments: CommentType[]
 }
+
+export type NavigationIconType = { focused: boolean, color: string, size: number }
