@@ -1,12 +1,14 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, Dimensions } from "react-native";
 import Author from "./Author";
+import Comments from "./Comments";
 
 export default function Post(props: any) {
   return (
     <View style={styles.container}>
       <Image source={props.image} style={styles.image} />
       <Author email={"fulano@gmail.com"} nickname={"Fulano"}/>
+      <Comments comments={props.comments} />
     </View>
   );
 }
