@@ -12,6 +12,7 @@ export default function Login(props: any) {
 
   const [loginState, setLoginState] = useState<LoginType>(initialLoginState);
 
+  const refInput = useRef<any>();
 
   function login() {
     props.navigation.navigate("Profile");
@@ -35,6 +36,9 @@ export default function Login(props: any) {
         keyboardType={"email-address"}
         value={loginState.email}
         onChangeText={setEmail}
+        returnKeyType={'next'}
+        onSubmitEditing={() => refInput?.current?.focus()}
+        blurOnSubmit={false}
       />
       <TextInput
         placeholder={"Password"}
@@ -42,6 +46,7 @@ export default function Login(props: any) {
         secureTextEntry={true}
         value={loginState.password}
         onChangeText={setPassword}
+        ref={refInput}
       />
       <TouchableOpacity onPress={login} style={styles.button}>
         <Text style={styles.buttonText}>Login</Text>
