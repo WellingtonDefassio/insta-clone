@@ -4,12 +4,17 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { Gravatar } from "react-native-gravatar";
 import Header from "../components/Header";
 
-export default function Profile() {
+interface ProfileProps {
+  navigation: any;
+  logOut: () => void
+}
+
+export default function Profile(props: ProfileProps) {
 
   const options = { email: "fulanodetal@gmail.com", secure: true };
 
   function logout() {
-
+    props.logOut();
   }
 
   function renderProfile() {
