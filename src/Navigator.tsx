@@ -5,6 +5,7 @@ import Feed from "./screens/Feed";
 import Icon from "react-native-vector-icons/FontAwesome";
 import { NavigationIconType } from "./types/Types";
 import AddPhoto from "./screens/AddPhoto";
+import Profile from "./screens/Profile";
 
 const Tab = createBottomTabNavigator();
 
@@ -25,7 +26,7 @@ export default function Navigator() {
                     options={{ tabBarIcon: (options: NavigationIconType) => (iconTabRender(options, "home")) }} />
         <Tab.Screen name={"AddPhoto"} component={AddPhoto}
                     options={{ tabBarIcon: (options: NavigationIconType) => (iconTabRender(options, "camera")) }} />
-        <Tab.Screen name={"Profile"} component={Feed}
+        <Tab.Screen name={"Profile"} component={Profile}
                     options={{ tabBarIcon: (options: NavigationIconType) => (iconTabRender(options, "user")) }} />
 
       </Tab.Navigator>
