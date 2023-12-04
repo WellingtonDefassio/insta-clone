@@ -8,6 +8,7 @@ import AddPhoto from "./screens/AddPhoto";
 import Profile from "./screens/Profile";
 import Login from "./screens/Login";
 import { Screen } from "react-native-screens";
+import Header from "./components/Header";
 
 const Tab = createBottomTabNavigator();
 
@@ -33,6 +34,7 @@ export default function Navigator() {
 
   return (
     <NavigationContainer>
+      <Header/>
       <Tab.Navigator initialRouteName={"Feed"}
                      screenOptions={{ tabBarShowLabel: false, headerShown: false }}>
         <Tab.Screen name={"Feed"} component={Feed}

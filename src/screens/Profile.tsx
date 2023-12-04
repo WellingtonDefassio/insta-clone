@@ -25,7 +25,6 @@ export default function Profile(props: ProfileProps) {
   return (
 
     <View style={styles.container}>
-      <Header />
       <Gravatar options={options} style={styles.avatar} />
       <Text style={styles.nickname}>fulano de tal</Text>
       <Text style={styles.email}>fulanodetal@gmail.com</Text>

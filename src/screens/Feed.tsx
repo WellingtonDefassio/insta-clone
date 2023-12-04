@@ -63,7 +63,6 @@ export default function Feed() {
 
   return (
     <View style={styles.container}>
-      <Header />
       <FlatList
         data={postState}
         keyExtractor={item => `${item.id}`}

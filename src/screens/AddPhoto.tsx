@@ -62,7 +62,6 @@ export default function AddPhoto() {
   return (
 
     <ScrollView>
-      <Header />
       <View style={styles.container}>
         <Text style={styles.title}>Share one image</Text>
         <View style={styles.imageContainer}>

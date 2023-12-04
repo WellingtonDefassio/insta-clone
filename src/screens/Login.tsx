@@ -28,7 +28,6 @@ export default function Login(props: any) {
 
   return (
     <View style={styles.container}>
-      <Header />
       <TextInput
         placeholder={"Email"}
         style={styles.input}
