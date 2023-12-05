@@ -1,14 +1,14 @@
 import { USER_LOGGED_IN, USER_LOGGED_OUT } from "./actionTypes";
 
 
-export function login(user: any) {
+export function loginAction(user: any) {
   return {
     type: USER_LOGGED_IN,
     payload: user
   };
 }
 
-export function logout() {
+export function logoutAction() {
   return {
     type: USER_LOGGED_OUT
   };

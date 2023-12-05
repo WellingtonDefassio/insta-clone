@@ -1,6 +1,8 @@
 import React, { createRef, useEffect, useRef, useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import { LoginType } from "../types/Types";
+import { connect } from "react-redux";
+import { loginAction } from "../store/actions/UserAction";
 import Header from "../components/Header";
 
 const initialLoginState: LoginType = {
@@ -8,14 +10,15 @@ const initialLoginState: LoginType = {
   password: ""
 };
 
-export default function Login(props: any) {
+function Login(props: any) {
 
   const [loginState, setLoginState] = useState<LoginType>(initialLoginState);
 
   const refInput = useRef<any>();
 
   function login() {
-    props.navigation.navigate("Profile");
+    props.onLogin({...loginState});
+    // props.navigation.navigate("Profile");
   }
 
   function setEmail(email: string) {
@@ -36,7 +39,7 @@ export default function Login(props: any) {
         keyboardType={"email-address"}
         value={loginState.email}
         onChangeText={setEmail}
-        returnKeyType={'next'}
+        returnKeyType={"next"}
         onSubmitEditing={() => refInput?.current?.focus()}
         blurOnSubmit={false}
       />
@@ -52,13 +55,21 @@ export default function Login(props: any) {
         <Text style={styles.buttonText}>Login</Text>
       </TouchableOpacity>
       <TouchableOpacity onPress={() => {
-        props.navigation.navigate("Register")
+        props.navigation.navigate("Register");
       }} style={styles.button}>
         <Text style={styles.buttonText}>Create Account...</Text>
       </TouchableOpacity>
     </View>
   );
 }
+
+function mapDispatchToProps(dispatch: any) {
+  return {
+    onLogin: (user: any) => dispatch(loginAction(user))
+  };
+}
+
+export default connect(null, mapDispatchToProps)(Login);
 
 
 const styles = StyleSheet.create({
@@ -83,6 +94,6 @@ const styles = StyleSheet.create({
     height: 40,
     borderWidth: 1,
     borderColor: "#333"
-  },
+  }
 
 });

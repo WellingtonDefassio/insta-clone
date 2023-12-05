@@ -16,7 +16,7 @@ const Stack = createStackNavigator();
 
 export default function Navigator() {
 
-    const [isAuth, setIsAuth] = useState(true);
+    const [isAuth, setIsAuth] = useState(false);
 
     function iconTabRender(options: NavigationIconType, name: string) {
         return (
