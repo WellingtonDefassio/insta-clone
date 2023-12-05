@@ -12,13 +12,16 @@ const initialLoginState: LoginType = {
 
 function Login(props: any) {
 
+  console.log(props);
+
   const [loginState, setLoginState] = useState<LoginType>(initialLoginState);
 
   const refInput = useRef<any>();
 
   function login() {
     props.onLogin({...loginState});
-    // props.navigation.navigate("Profile");
+    props.logIn();
+    props.navigation.navigate("Profile");
   }
 
   function setEmail(email: string) {
