@@ -4,20 +4,23 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Gravatar } from "react-native-gravatar";
 import { connect } from "react-redux";
 import { logoutAction } from "../store/actions/UserAction";
+import { LoginType } from "../types/Types";
 
 interface ProfileProps {
   navigation: any;
   logOut: () => void;
-  onLogOut: any;
+  onLogout: any;
   email: string;
 }
 
 function Profile(props: ProfileProps) {
 
+  console.log(props);
+
   const options = { email: props.email, secure: true };
 
   function logout() {
-    props.onLogOut();
+    props.onLogout();
     props.logOut();
   }
 
@@ -39,7 +42,7 @@ function Profile(props: ProfileProps) {
   );
 }
 
-const mapStateToProps = ({ user }: { user: any }) => {
+const mapStateToProps = ({ user }: { user: LoginType }) => {
   return {
     email: user.email
   };

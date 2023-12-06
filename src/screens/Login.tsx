@@ -1,9 +1,8 @@
-import React, { createRef, useEffect, useRef, useState } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import React, { useRef, useState } from "react";
+import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { LoginType } from "../types/Types";
 import { connect } from "react-redux";
 import { loginAction } from "../store/actions/UserAction";
-import Header from "../components/Header";
 
 const initialLoginState: LoginType = {
   email: "",
@@ -11,8 +10,6 @@ const initialLoginState: LoginType = {
 };
 
 function Login(props: any) {
-
-  console.log(props);
 
   const [loginState, setLoginState] = useState<LoginType>(initialLoginState);
 
