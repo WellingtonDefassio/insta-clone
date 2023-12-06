@@ -27,3 +27,8 @@ export type RegisterType = {
   password: string
   name: string
 }
+
+export type ActionType = {
+  type: string,
+  payload?: any
+}
