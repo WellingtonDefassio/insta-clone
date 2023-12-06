@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { LoginType } from "../types/Types";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { loginAction } from "../store/slices/UserSlice";
 
 const initialLoginState: LoginType = {
@@ -18,8 +18,7 @@ export default function Login(props: any) {
   const refInput = useRef<any>();
 
   function login() {
-    dispatch(loginAction({ name: "FixedName", email: loginState.email }));
-    props.logIn();
+    dispatch(loginAction({ name: "FixedName", email: loginState.email, isLogged: true }));
     props.navigation.navigate("Profile");
   }
 

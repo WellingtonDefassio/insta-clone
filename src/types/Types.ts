@@ -31,5 +31,6 @@ export type RegisterType = {
 
 export type NameEmailType = {
   email: string,
-  name: string
+  name: string,
+  isLogged: boolean
 }

@@ -8,8 +8,6 @@ import { logoutAction } from "../store/slices/UserSlice";
 
 interface ProfileProps {
   navigation: any;
-  logOut: () => void;
-  onLogout: any;
   email: string;
 }
 
@@ -22,7 +20,6 @@ export default function Profile(props: ProfileProps) {
 
   function logout() {
     dispatch(logoutAction());
-    props.logOut();
   }
 
   return (
