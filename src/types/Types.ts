@@ -20,6 +20,7 @@ export type ImagePickerType = {uri: string, base64 : string}
 export type LoginType = {
   email: string
   password: string
+  name?: string
 }
 
 export type RegisterType = {

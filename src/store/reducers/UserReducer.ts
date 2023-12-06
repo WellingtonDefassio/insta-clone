@@ -2,7 +2,7 @@ import { USER_LOGGED_IN, USER_LOGGED_OUT } from "../actions/actionTypes";
 import { ActionType } from "../../types/Types";
 
 const initialState = {
-  name: null,
+  name: "Temp name",
   email: null
 };
 
@@ -12,7 +12,6 @@ export default function reducer(state = initialState, action: ActionType) {
     case USER_LOGGED_IN:
       return {
         ...state,
-        name: action.payload.name,
         email: action.payload.email
       };
     case USER_LOGGED_OUT:

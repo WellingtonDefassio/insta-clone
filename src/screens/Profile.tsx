@@ -11,11 +11,10 @@ interface ProfileProps {
   logOut: () => void;
   onLogout: any;
   email: string;
+  name?: string
 }
 
 function Profile(props: ProfileProps) {
-
-  console.log(props);
 
   const options = { email: props.email, secure: true };
 
@@ -33,7 +32,7 @@ function Profile(props: ProfileProps) {
 
     <View style={styles.container}>
       <Gravatar options={options} style={styles.avatar} />
-      <Text style={styles.nickname}>fulano de tal</Text>
+      <Text style={styles.nickname}>{props.name}</Text>
       <Text style={styles.email}>{props.email}</Text>
       <TouchableOpacity onPress={logout} style={styles.button}>
         <Text style={styles.buttonText}>Logout</Text>
@@ -44,7 +43,8 @@ function Profile(props: ProfileProps) {
 
 const mapStateToProps = ({ user }: { user: LoginType }) => {
   return {
-    email: user.email
+    email: user.email,
+    name: user.name
   };
 };
 
