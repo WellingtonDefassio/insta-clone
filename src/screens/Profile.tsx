@@ -2,9 +2,9 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 // @ts-ignore
 import { Gravatar } from "react-native-gravatar";
-import { connect } from "react-redux";
-import { logoutAction } from "../store/actions/UserAction";
-import { LoginType } from "../types/Types";
+import { useDispatch, useSelector } from "react-redux";
+import { NameEmailType } from "../types/Types";
+import { logoutAction } from "../store/slices/UserSlice";
 
 interface ProfileProps {
   navigation: any;
@@ -13,14 +13,17 @@ interface ProfileProps {
   email: string;
 }
 
-function Profile(props: ProfileProps) {
+export default function Profile(props: ProfileProps) {
 
   console.log(props);
+
+  const user = useSelector(({ user }): NameEmailType => user);
+  const dispatch = useDispatch();
 
   const options = { email: props.email, secure: true };
 
   function logout() {
-    props.onLogout();
+    dispatch(logoutAction());
     props.logOut();
   }
 
@@ -33,28 +36,14 @@ function Profile(props: ProfileProps) {
 
     <View style={styles.container}>
       <Gravatar options={options} style={styles.avatar} />
-      <Text style={styles.nickname}>fulano de tal</Text>
-      <Text style={styles.email}>{props.email}</Text>
+      <Text style={styles.nickname}>{user.name}</Text>
+      <Text style={styles.email}>{user.email}</Text>
       <TouchableOpacity onPress={logout} style={styles.button}>
         <Text style={styles.buttonText}>Logout</Text>
       </TouchableOpacity>
     </View>
   );
 }
-
-const mapStateToProps = ({ user }: { user: LoginType }) => {
-  return {
-    email: user.email
-  };
-};
-
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    onLogout: () => dispatch(logoutAction())
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Profile);
 
 const styles = StyleSheet.create({
   container: {

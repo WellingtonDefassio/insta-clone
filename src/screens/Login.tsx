@@ -1,22 +1,24 @@
 import React, { useRef, useState } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { LoginType } from "../types/Types";
-import { connect } from "react-redux";
-import { loginAction } from "../store/actions/UserAction";
+import { useDispatch, useSelector } from "react-redux";
+import { loginAction } from "../store/slices/UserSlice";
 
 const initialLoginState: LoginType = {
   email: "",
   password: ""
 };
 
-function Login(props: any) {
+export default function Login(props: any) {
+
+  let dispatch = useDispatch();
 
   const [loginState, setLoginState] = useState<LoginType>(initialLoginState);
 
   const refInput = useRef<any>();
 
   function login() {
-    props.onLogin({...loginState});
+    dispatch(loginAction({ name: "FixedName", email: loginState.email }));
     props.logIn();
     props.navigation.navigate("Profile");
   }
@@ -62,14 +64,6 @@ function Login(props: any) {
     </View>
   );
 }
-
-function mapDispatchToProps(dispatch: any) {
-  return {
-    onLogin: (user: any) => dispatch(loginAction(user))
-  };
-}
-
-export default connect(null, mapDispatchToProps)(Login);
 
 
 const styles = StyleSheet.create({
