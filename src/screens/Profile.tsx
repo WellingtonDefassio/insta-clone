@@ -15,8 +15,6 @@ interface ProfileProps {
 
 export default function Profile(props: ProfileProps) {
 
-  console.log(props);
-
   const user = useSelector(({ user }): NameEmailType => user);
   const dispatch = useDispatch();
 
@@ -27,13 +25,7 @@ export default function Profile(props: ProfileProps) {
     props.logOut();
   }
 
-  function renderProfile() {
-
-  }
-
-
   return (
-
     <View style={styles.container}>
       <Gravatar options={options} style={styles.avatar} />
       <Text style={styles.nickname}>{user.name}</Text>
