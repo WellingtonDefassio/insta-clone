@@ -12,8 +12,10 @@ import {
 } from "react-native";
 
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
-import { ImagePickerType } from "../types/Types";
+import { CommentType, ImagePickerType } from "../types/Types";
 import Header from "../components/Header";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { addPostAction } from "../store/slices/PostSlice";
 
 
 const initialImageState: ImagePickerType = {
@@ -21,10 +23,15 @@ const initialImageState: ImagePickerType = {
   uri: ""
 };
 
-export default function AddPhoto() {
+
+export default function AddPhoto(props: any) {
 
   const [imageState, setImageState] = useState(initialImageState);
   const [commentState, setCommentState] = useState("");
+
+  let user = useAppSelector((props) => props.user);
+
+  let dispatch = useAppDispatch();
 
   async function takePicture() {
     let imagePickerResponse = await launchCamera({
@@ -34,7 +41,8 @@ export default function AddPhoto() {
     });
     if (imagePickerResponse.assets?.length) {
       let assets = imagePickerResponse.assets[0];
-      setImageState({ uri: assets.uri as string, base64: assets.base64 as string });
+      console.log(assets);
+      setImageState({ uri: assets.uri as string, base64: assets.originalPath as string });
     }
   }
 
@@ -56,7 +64,24 @@ export default function AddPhoto() {
   }
 
   async function saveImage() {
-    Alert.alert("Image add!", commentState);
+    console.log(imageState);
+
+    dispatch(addPostAction([
+      {
+        id: Math.random(),
+        nickname: user.name,
+        email: user.email,
+        image: imageState,
+        comments: [{
+          nickname: user.name,
+          comment: commentState
+        }]
+      }
+    ]));
+
+    setImageState(initialImageState);
+    setCommentState("");
+    props.navigation.navigate("Feed")
   }
 
   return (
