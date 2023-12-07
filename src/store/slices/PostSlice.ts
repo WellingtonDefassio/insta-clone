@@ -50,6 +50,11 @@ const posts: PostType[] = [
 
 const initialState: PostType[] = posts;
 
+interface AddCommentProps {
+  id: number;
+  comment: string;
+  nickname: string;
+}
 
 const postSlice = createSlice({
   name: "post",
@@ -57,11 +62,20 @@ const postSlice = createSlice({
   reducers: {
     addPostAction: (state, action: PayloadAction<PostType[]>) => {
       state.push(...action.payload);
+    },
+    addComment: (state, action: PayloadAction<AddCommentProps>) => {
+      state = state.map(post => {
+        if (post.id === action.payload.id) {
+          post.comments.push({ comment: action.payload.comment, nickname: action.payload.nickname });
+          return post;
+        }
+        return post;
+      });
     }
   }
 });
 
-export const { addPostAction } = postSlice.actions;
+export const { addPostAction, addComment } = postSlice.actions;
 
 export const selectedPosts = (state: RootState) => state.post;
 export default postSlice.reducer;

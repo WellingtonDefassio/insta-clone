@@ -1,14 +1,28 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Alert, TextInput, TouchableWithoutFeedback } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { PostType } from "../types/Types";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { addComment } from "../store/slices/PostSlice";
 
-export default function AddComment() {
+interface AddCommentProps {
+  postId: number
+}
 
+export default function AddComment(props: AddCommentProps) {
+
+  let user = useAppSelector(({ user }) => user);
+  let dispatch = useAppDispatch();
   const [commentState, setCommentState] = useState("");
   const [editModeState, setEditModeState] = useState(false);
 
   function handleAddComment() {
-    Alert.alert("Add", commentState);
+    if (commentState === "") {
+      return
+    }
+    dispatch(addComment({ id: props.postId, comment: commentState, nickname: user.name }));
+    setCommentState("");
+    setEditModeState(false)
   }
 
   function editModeRender() {
@@ -40,7 +54,7 @@ export default function AddComment() {
   }
 
   return (
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1}}>
       {editModeState ? editModeRender() : createModeRender()}
     </View>
   );
