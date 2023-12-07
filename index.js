@@ -4,7 +4,7 @@ import { AppRegistry } from "react-native";
 import { name as appName } from "./app.json";
 import { Provider } from "react-redux";
 import Navigator from "./src/Navigator";
-import store from "./src/store/store";
+import { store } from "./src/store/store";
 
 
 function Redux() {

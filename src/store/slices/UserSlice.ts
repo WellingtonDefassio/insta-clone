@@ -1,18 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { NameEmailType } from "../../types/Types";
+import { RootState } from "../store";
 
 
 const initialState: NameEmailType = {
   name: "",
   email: "",
-  isLogged: false,
+  isLogged: false
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    loginAction: (state, action: {payload: NameEmailType}) => {
+    loginAction: (state, action: PayloadAction<NameEmailType>) => {
       state.name = action.payload.name;
       state.email = action.payload.email;
       state.isLogged = true;
@@ -26,4 +27,7 @@ const userSlice = createSlice({
 });
 
 export const { loginAction, logoutAction } = userSlice.actions;
+
+//todo pode criar select especifico para os dados user com appUseSelector(selectEmail)
+export const selectEmail = (state: RootState) => state.user.email;
 export default userSlice.reducer;

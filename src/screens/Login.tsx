@@ -1,8 +1,8 @@
 import React, { useRef, useState } from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { LoginType } from "../types/Types";
-import { useDispatch } from "react-redux";
 import { loginAction } from "../store/slices/UserSlice";
+import { useAppDispatch } from "../store/hooks";
 
 const initialLoginState: LoginType = {
   email: "",
@@ -11,7 +11,7 @@ const initialLoginState: LoginType = {
 
 export default function Login(props: any) {
 
-  let dispatch = useDispatch();
+  let dispatch = useAppDispatch();
 
   const [loginState, setLoginState] = useState<LoginType>(initialLoginState);
 

@@ -2,9 +2,9 @@ import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 // @ts-ignore
 import { Gravatar } from "react-native-gravatar";
-import { useDispatch, useSelector } from "react-redux";
 import { NameEmailType } from "../types/Types";
-import { logoutAction } from "../store/slices/UserSlice";
+import { logoutAction, selectEmail } from "../store/slices/UserSlice";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
 
 interface ProfileProps {
   navigation: any;
@@ -12,9 +12,8 @@ interface ProfileProps {
 }
 
 export default function Profile(props: ProfileProps) {
-
-  const user = useSelector(({ user }): NameEmailType => user);
-  const dispatch = useDispatch();
+  const user = useAppSelector(({ user }): NameEmailType => user);
+  const dispatch = useAppDispatch();
 
   const options = { email: props.email, secure: true };
 
