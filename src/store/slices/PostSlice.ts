@@ -1,6 +1,7 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { CommentType, PostType } from "../../types/Types";
+import axios from "axios";
 
 const comments: CommentType[] = [
   {
@@ -56,6 +57,15 @@ interface AddCommentProps {
   nickname: string;
 }
 
+export const addPostFirebase = createAsyncThunk("post/create",
+  async (post: PostType) => {
+    await axios.post("/posts.json", { ...post })
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err));
+  }
+);
+
+
 const postSlice = createSlice({
   name: "post",
   initialState,
@@ -72,6 +82,11 @@ const postSlice = createSlice({
         return post;
       });
     }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(addPostFirebase.fulfilled, (state, action) => {
+      console.log("chamou o post/create");
+    });
   }
 });
 

@@ -6,6 +6,8 @@ import { Provider } from "react-redux";
 import Navigator from "./src/Navigator";
 import { store } from "./src/store/store";
 
+import axios from  "axios";
+axios.defaults.baseURL = "https://inst-8edf3-default-rtdb.firebaseio.com/"
 
 function Redux() {
   return (
