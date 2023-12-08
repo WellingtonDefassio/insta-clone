@@ -3,7 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 // @ts-ignore
 import { Gravatar } from "react-native-gravatar";
 import { NameEmailType } from "../types/Types";
-import { logoutAction, selectEmail } from "../store/slices/UserSlice";
+import { logoutAction } from "../store/slices/UserSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 
 interface ProfileProps {

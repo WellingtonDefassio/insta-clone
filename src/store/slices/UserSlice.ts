@@ -4,7 +4,7 @@ import { RootState } from "../store";
 
 
 const initialState: NameEmailType = {
-  name: "",
+  name: null,
   email: "",
   isLogged: false
 };
@@ -28,6 +28,6 @@ const userSlice = createSlice({
 
 export const { loginAction, logoutAction } = userSlice.actions;
 
-//todo pode criar select especifico para os dados user com appUseSelector(selectEmail)
-export const selectEmail = (state: RootState) => state.user.email;
+//todo pode criar select especifico para os dados user com appUseSelector(selectName)
+export const selectName = (state: RootState) => state.user.name;
 export default userSlice.reducer;

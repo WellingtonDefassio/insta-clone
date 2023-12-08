@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import {
-  View,
-  Text,
   Alert,
+  Dimensions,
+  Image,
   ScrollView,
   StyleSheet,
-  Image,
-  TouchableOpacity,
+  Text,
   TextInput,
-  Dimensions
+  TouchableOpacity,
+  View
 } from "react-native";
 
 import { launchCamera, launchImageLibrary } from "react-native-image-picker";
-import { CommentType, ImagePickerType } from "../types/Types";
-import Header from "../components/Header";
+import { ImagePickerType } from "../types/Types";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { addPostAction } from "../store/slices/PostSlice";
 
@@ -28,12 +27,17 @@ export default function AddPhoto(props: any) {
 
   const [imageState, setImageState] = useState(initialImageState);
   const [commentState, setCommentState] = useState("");
-
   let user = useAppSelector((props) => props.user);
-
   let dispatch = useAppDispatch();
 
+
+  const noUser = "You need be logged to add a image";
+
   async function takePicture() {
+    if (user.name == null) {
+      Alert.alert("Fail", noUser);
+      return
+    }
     let imagePickerResponse = await launchCamera({
       mediaType: "photo",
       maxHeight: 600,
@@ -47,6 +51,10 @@ export default function AddPhoto(props: any) {
   }
 
   async function takeAlbum() {
+    if (user.name == null) {
+      Alert.alert("Fail", noUser);
+      return
+    }
     let imagePickerResponse = await launchImageLibrary({
       mediaType: "photo",
       maxHeight: 600,
@@ -64,16 +72,18 @@ export default function AddPhoto(props: any) {
   }
 
   async function saveImage() {
-    console.log(imageState);
-
+    if (user.name == null) {
+      Alert.alert("Fail", noUser);
+      return
+    }
     dispatch(addPostAction([
       {
         id: Math.random(),
-        nickname: user.name,
+        nickname: user.name as string,
         email: user.email,
         image: imageState,
         comments: [{
-          nickname: user.name,
+          nickname: user.name as string,
           comment: commentState
         }]
       }
@@ -81,7 +91,7 @@ export default function AddPhoto(props: any) {
 
     setImageState(initialImageState);
     setCommentState("");
-    props.navigation.navigate("Feed")
+    props.navigation.navigate("Feed");
   }
 
   return (
@@ -101,7 +111,7 @@ export default function AddPhoto(props: any) {
             <Text style={styles.buttonText}>Album</Text>
           </TouchableOpacity>
         </View>
-        <TextInput placeholder={"Add a comment to photo"} style={styles.input} value={commentState}
+        <TextInput editable={!!user.name} placeholder={"Add a comment to photo"} style={styles.input} value={commentState}
                    onChangeText={textRender} />
         <TouchableOpacity onPress={saveImage} style={styles.buttonSave}>
           <Text style={styles.buttonText}>Save</Text>

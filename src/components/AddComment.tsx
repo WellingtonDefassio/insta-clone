@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Alert, TextInput, TouchableWithoutFeedback } from "react-native";
+import { StyleSheet, Text, TextInput, TouchableWithoutFeedback, View } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { PostType } from "../types/Types";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { addComment } from "../store/slices/PostSlice";
 
